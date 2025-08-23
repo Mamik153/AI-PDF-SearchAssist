@@ -13,10 +13,32 @@ export default defineConfig({
       autoCodeSplitting: true,
     }),
     react(),
-    tailwindcss()],
+    tailwindcss()
+  ],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
+  },
+  server: {
+    // Hot reload configuration
+    hmr: {
+      overlay: true,
+    },
+    // Watch for changes in these file patterns
+    watch: {
+      usePolling: true,
+      interval: 100,
+    },
+  },
+  // Optimize deps for faster cold start
+  optimizeDeps: {
+    include: [
+      'react',
+      'react-dom',
+      '@tanstack/react-router',
+      '@tanstack/react-query',
+      '@supabase/supabase-js'
+    ],
   },
 })
