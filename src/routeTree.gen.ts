@@ -9,10 +9,15 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as NotebookRouteImport } from './routes/notebook'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as NotebookIdRouteImport } from './routes/notebook.$id'
 
+const NotebookRoute = NotebookRouteImport.update({
+  id: '/notebook',
+  path: '/notebook',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
@@ -23,44 +28,46 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const NotebookIdRoute = NotebookIdRouteImport.update({
-  id: '/notebook/$id',
-  path: '/notebook/$id',
-  getParentRoute: () => rootRouteImport,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/notebook/$id': typeof NotebookIdRoute
+  '/notebook': typeof NotebookRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/notebook/$id': typeof NotebookIdRoute
+  '/notebook': typeof NotebookRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/notebook/$id': typeof NotebookIdRoute
+  '/notebook': typeof NotebookRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/notebook/$id'
+  fullPaths: '/' | '/about' | '/notebook'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/notebook/$id'
-  id: '__root__' | '/' | '/about' | '/notebook/$id'
+  to: '/' | '/about' | '/notebook'
+  id: '__root__' | '/' | '/about' | '/notebook'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
-  NotebookIdRoute: typeof NotebookIdRoute
+  NotebookRoute: typeof NotebookRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/notebook': {
+      id: '/notebook'
+      path: '/notebook'
+      fullPath: '/notebook'
+      preLoaderRoute: typeof NotebookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/about': {
       id: '/about'
       path: '/about'
@@ -75,20 +82,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/notebook/$id': {
-      id: '/notebook/$id'
-      path: '/notebook/$id'
-      fullPath: '/notebook/$id'
-      preLoaderRoute: typeof NotebookIdRouteImport
-      parentRoute: typeof rootRouteImport
-    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
-  NotebookIdRoute: NotebookIdRoute,
+  NotebookRoute: NotebookRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
