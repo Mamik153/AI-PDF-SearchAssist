@@ -54,7 +54,7 @@ export function ChatArea({
       </div>
 
       {/* Chat Messages */}
-      <Conversation className="flex-1 px-6 h-[calc(100vh-14rem)]" >
+      <Conversation className="flex-1 px-6 h-[calc(100vh-14rem)] max-w-4xl w-full mx-auto" >
         <ConversationContent>
           {messages.map((message) => (
             <ChatMessageItem key={message.id} message={message} />

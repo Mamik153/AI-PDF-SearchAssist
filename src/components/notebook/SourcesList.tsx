@@ -42,6 +42,7 @@ export function SourcesList({
           <SidebarMenuItem>
             <SidebarMenuButton
               size="lg"
+              variant={"outline"}
               className="data-[state=open]:bg-white data-[state=open]:text-sidebar-accent-foreground"
             >
               <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
@@ -67,9 +68,10 @@ export function SourcesList({
                   disabled={sources.length >= 20}
                   className="w-full items-center justify-center"
                   tooltip="Add PDF"
+                  variant={"outline"}
                 >
                   <Plus className="h-4 w-4" />
-                  <span>Add PDF</span>
+                  <span className='group-data-[collapsible=icon]:hidden'>Add PDF</span>
                 </SidebarMenuButton>
                 <Input
                   ref={fileInputRef}
@@ -102,6 +104,7 @@ export function SourcesList({
                 sources.map((source) => (
                   <SidebarMenuItem key={source.id}>
                     <SidebarMenuButton
+                      variant={"outline"}
                       asChild
                       className="h-auto p-3 bg-white rounded-lg border hover:shadow-sm transition-shadow"
                       tooltip={source.name}
@@ -140,12 +143,12 @@ export function SourcesList({
                 <SidebarMenuButton
                   onClick={onProcessPDFs}
                   disabled={isUploading}
-                  variant="outline"
-                  className="w-full"
+                  variant="default"
+                  className="w-full items-center justify-center"
                   tooltip={isUploading ? 'Processing...' : 'Process PDFs'}
                 >
                   <Upload className="h-4 w-4" />
-                  <span>{isUploading ? 'Processing...' : 'Process PDFs'}</span>
+                  <span className='group-data-[collapsible=icon]:hidden'>{isUploading ? 'Processing...' : 'Process PDFs'}</span>
                 </SidebarMenuButton>
 
               </div>

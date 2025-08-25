@@ -20,7 +20,7 @@ export function ChatInput({ value, onChange, onSend, disabled }: ChatInputProps)
 
   return (
     <div className="border-t p-4 flex-shrink-0">
-      <PromptInput onSubmit={handleSubmit} className="mt-4 relative">
+      <PromptInput onSubmit={handleSubmit} className="mt-4 relative max-w-4xl mx-auto w-full">
         <PromptInputTextarea 
           onChange={(e) => {
             onChange(e.target.value)
@@ -30,7 +30,7 @@ export function ChatInput({ value, onChange, onSend, disabled }: ChatInputProps)
         />
         <PromptInputToolbar>
           <PromptInputSubmit
-            className="absolute right-1 bottom-1"
+            className="absolute right-1 bottom-1 rounded-full"
             disabled={disabled || !value.trim()}
             status={'ready'}
           />
