@@ -52,7 +52,7 @@ export function SummaryPanel({ isOpen, onToggle }: SummaryPanelProps) {
   }
 
   return (
-    <div className={`flex transition-all duration-300 ease-in-out ${isOpen ? 'w-80' : ''}`}>
+    <div className={`flex transition-all duration-300 ease-in-out ${isOpen ? 'w-80' : 'w-0'}`}>
       {/* Toggle Button - Always visible */}
       {/* <div className="flex items-center justify-center w-12 border-l bg-gray-50 flex-shrink-0">
         <Button
@@ -67,8 +67,8 @@ export function SummaryPanel({ isOpen, onToggle }: SummaryPanelProps) {
       </div> */}
       
       {/* Panel Content - Slides in/out */}
-      <div className={`border bg-white rounded-2xl flex flex-col h-full transition-all duration-300 ease-in-out overflow-hidden ${
-        isOpen ? 'w-80 opacity-100' : 'w-0 opacity-0'
+      <div className={`border bg-white rounded-2xl flex flex-col h-full transition-all duration-300 ease-in-out overflow-hidden w-80 ${
+        isOpen ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'
       }`}>
         {/* Header */}
         <div className="border-b p-4 flex-shrink-0">
